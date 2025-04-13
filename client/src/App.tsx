@@ -81,7 +81,9 @@ const App = () => {
   });
   const [transportType, setTransportType] = useState<"stdio" | "sse">(() => {
     return (
-      (localStorage.getItem("lastTransportType") as "stdio" | "sse") || "stdio"
+      (localStorage.getItem("lastTransportType") as "stdio" | "sse") ||
+      import.meta.env.VITE_MCP_PROXY_FULL_ADDRESS ||
+      "stdio"
     );
   });
   const [logLevel, setLogLevel] = useState<LoggingLevel>("debug");
