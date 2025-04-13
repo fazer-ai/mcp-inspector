@@ -1,5 +1,5 @@
 {
-  "name": "@modelcontextprotocol/inspector",
+  "name": "@fazer-ai/mcp-inspector",
   "version": "0.8.2",
   "description": "Model Context Protocol inspector",
   "license": "MIT",
@@ -48,5 +48,8 @@
     "@types/node": "^22.7.5",
     "@types/shell-quote": "^1.7.5",
     "prettier": "3.3.3"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.40.0"
   }
 }
