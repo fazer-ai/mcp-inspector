@@ -82,7 +82,7 @@ const App = () => {
   const [transportType, setTransportType] = useState<"stdio" | "sse">(() => {
     return (
       (localStorage.getItem("lastTransportType") as "stdio" | "sse") ||
-      import.meta.env.VITE_MCP_PROXY_FULL_ADDRESS ||
+      import.meta.env.VITE_MCP_DEFAULT_TRANSPORT_TYPE ||
       "stdio"
     );
   });
