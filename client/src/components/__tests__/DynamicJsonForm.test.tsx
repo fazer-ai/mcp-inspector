@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, it, expect, jest } from "@jest/globals";
+import { describe, it, expect, vi } from "vitest";
 import DynamicJsonForm from "../DynamicJsonForm";
 import type { JsonSchemaType } from "@/utils/jsonUtils";
 
@@ -11,14 +11,14 @@ describe("DynamicJsonForm String Fields", () => {
         description: "Test string field",
       } satisfies JsonSchemaType,
       value: undefined,
-      onChange: jest.fn(),
+      onChange: vi.fn(),
     };
     return render(<DynamicJsonForm {...defaultProps} {...props} />);
   };
 
   describe("Type Validation", () => {
     it("should handle numeric input as string type", () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       renderForm({ onChange });
 
       const input = screen.getByRole("textbox");
@@ -45,7 +45,7 @@ describe("DynamicJsonForm Integer Fields", () => {
         description: "Test integer field",
       } satisfies JsonSchemaType,
       value: undefined,
-      onChange: jest.fn(),
+      onChange: vi.fn(),
     };
     return render(<DynamicJsonForm {...defaultProps} {...props} />);
   };
@@ -59,7 +59,7 @@ describe("DynamicJsonForm Integer Fields", () => {
     });
 
     it("should pass integer values to onChange", () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       renderForm({ onChange });
 
       const input = screen.getByRole("spinbutton");
@@ -71,7 +71,7 @@ describe("DynamicJsonForm Integer Fields", () => {
     });
 
     it("should not pass string values to onChange", () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       renderForm({ onChange });
 
       const input = screen.getByRole("spinbutton");
@@ -83,7 +83,7 @@ describe("DynamicJsonForm Integer Fields", () => {
 
   describe("Edge Cases", () => {
     it("should handle non-numeric input by not calling onChange", () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       renderForm({ onChange });
 
       const input = screen.getByRole("spinbutton");

@@ -1,5 +1,6 @@
 import { generateDefaultValue, formatFieldLabel } from "../schemaUtils";
 import type { JsonSchemaType } from "../jsonUtils";
+import { describe, test, expect } from "vitest";
 
 describe("generateDefaultValue", () => {
   test("generates default string", () => {

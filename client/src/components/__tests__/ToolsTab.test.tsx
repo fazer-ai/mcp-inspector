@@ -1,6 +1,5 @@
 import { render, screen, fireEvent, act } from "@testing-library/react";
-import { describe, it, expect, jest } from "@jest/globals";
-import "@testing-library/jest-dom";
+import { describe, it, expect, vi } from "vitest";
 import ToolsTab from "../ToolsTab";
 import { Tool } from "@modelcontextprotocol/sdk/types.js";
 import { Tabs } from "@/components/ui/tabs";
@@ -41,11 +40,11 @@ describe("ToolsTab", () => {
 
   const defaultProps = {
     tools: mockTools,
-    listTools: jest.fn(),
-    clearTools: jest.fn(),
-    callTool: jest.fn(async () => {}),
+    listTools: vi.fn(),
+    clearTools: vi.fn(),
+    callTool: vi.fn(async () => {}),
     selectedTool: null,
-    setSelectedTool: jest.fn(),
+    setSelectedTool: vi.fn(),
     toolResult: null,
     nextCursor: "",
     error: null,
@@ -113,7 +112,7 @@ describe("ToolsTab", () => {
     });
 
     // Mock callTool to return our promise
-    const mockCallTool = jest.fn().mockReturnValue(mockPromise);
+    const mockCallTool = vi.fn().mockReturnValue(mockPromise);
 
     renderToolsTab({
       selectedTool: mockTools[0],

@@ -3,48 +3,49 @@ import { useConnection } from "../useConnection";
 import { z } from "zod";
 import { ClientRequest } from "@modelcontextprotocol/sdk/types.js";
 import { DEFAULT_INSPECTOR_CONFIG } from "../../constants";
+import { describe, test, beforeEach, expect, vi } from "vitest";
 
 // Mock fetch
-global.fetch = jest.fn().mockResolvedValue({
+global.fetch = vi.fn().mockResolvedValue({
   json: () => Promise.resolve({ status: "ok" }),
 });
 
 // Mock the SDK dependencies
-const mockRequest = jest.fn().mockResolvedValue({ test: "response" });
+const mockRequest = vi.fn().mockResolvedValue({ test: "response" });
 const mockClient = {
   request: mockRequest,
-  notification: jest.fn(),
-  connect: jest.fn().mockResolvedValue(undefined),
-  close: jest.fn(),
-  getServerCapabilities: jest.fn(),
-  setNotificationHandler: jest.fn(),
-  setRequestHandler: jest.fn(),
+  notification: vi.fn(),
+  connect: vi.fn().mockResolvedValue(undefined),
+  close: vi.fn(),
+  getServerCapabilities: vi.fn(),
+  setNotificationHandler: vi.fn(),
+  setRequestHandler: vi.fn(),
 };
 
-jest.mock("@modelcontextprotocol/sdk/client/index.js", () => ({
-  Client: jest.fn().mockImplementation(() => mockClient),
+vi.mock("@modelcontextprotocol/sdk/client/index.js", () => ({
+  Client: vi.fn().mockImplementation(() => mockClient),
 }));
 
-jest.mock("@modelcontextprotocol/sdk/client/sse.js", () => ({
-  SSEClientTransport: jest.fn(),
-  SseError: jest.fn(),
+vi.mock("@modelcontextprotocol/sdk/client/sse.js", () => ({
+  SSEClientTransport: vi.fn(),
+  SseError: vi.fn(),
 }));
 
-jest.mock("@modelcontextprotocol/sdk/client/auth.js", () => ({
-  auth: jest.fn().mockResolvedValue("AUTHORIZED"),
+vi.mock("@modelcontextprotocol/sdk/client/auth.js", () => ({
+  auth: vi.fn().mockResolvedValue("AUTHORIZED"),
 }));
 
 // Mock the toast hook
-jest.mock("@/hooks/use-toast", () => ({
+vi.mock("@/hooks/use-toast", () => ({
   useToast: () => ({
-    toast: jest.fn(),
+    toast: vi.fn(),
   }),
 }));
 
 // Mock the auth provider
-jest.mock("../../auth", () => ({
+vi.mock("../../auth", () => ({
   authProvider: {
-    tokens: jest.fn().mockResolvedValue({ access_token: "mock-token" }),
+    tokens: vi.fn().mockResolvedValue({ access_token: "mock-token" }),
   },
 }));
 
@@ -60,7 +61,7 @@ describe("useConnection", () => {
 
   describe("Request Configuration", () => {
     beforeEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
     });
 
     test("uses the default config values in makeRequest", async () => {

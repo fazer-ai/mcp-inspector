@@ -1,39 +1,39 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, it, beforeEach, jest } from "@jest/globals";
+import { describe, it, beforeEach, expect, vi } from "vitest";
 import Sidebar from "../Sidebar";
 import { DEFAULT_INSPECTOR_CONFIG } from "@/lib/constants";
 import { InspectorConfig } from "@/lib/configurationTypes";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 // Mock theme hook
-jest.mock("../../lib/useTheme", () => ({
+vi.mock("../../lib/useTheme", () => ({
   __esModule: true,
-  default: () => ["light", jest.fn()],
+  default: () => ["light", vi.fn()],
 }));
 
 describe("Sidebar Environment Variables", () => {
   const defaultProps = {
     connectionStatus: "disconnected" as const,
     transportType: "stdio" as const,
-    setTransportType: jest.fn(),
+    setTransportType: vi.fn(),
     command: "",
-    setCommand: jest.fn(),
+    setCommand: vi.fn(),
     args: "",
-    setArgs: jest.fn(),
+    setArgs: vi.fn(),
     sseUrl: "",
-    setSseUrl: jest.fn(),
+    setSseUrl: vi.fn(),
     env: {},
-    setEnv: jest.fn(),
+    setEnv: vi.fn(),
     bearerToken: "",
-    setBearerToken: jest.fn(),
-    onConnect: jest.fn(),
-    onDisconnect: jest.fn(),
+    setBearerToken: vi.fn(),
+    onConnect: vi.fn(),
+    onDisconnect: vi.fn(),
     stdErrNotifications: [],
     logLevel: "info" as const,
-    sendLogLevelRequest: jest.fn(),
+    sendLogLevelRequest: vi.fn(),
     loggingSupported: true,
     config: DEFAULT_INSPECTOR_CONFIG,
-    setConfig: jest.fn(),
+    setConfig: vi.fn(),
   };
 
   const renderSidebar = (props = {}) => {
@@ -50,12 +50,12 @@ describe("Sidebar Environment Variables", () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe("Basic Operations", () => {
     it("should add a new environment variable", () => {
-      const setEnv = jest.fn();
+      const setEnv = vi.fn();
       renderSidebar({ env: {}, setEnv });
 
       openEnvVarsSection();
@@ -67,7 +67,7 @@ describe("Sidebar Environment Variables", () => {
     });
 
     it("should remove an environment variable", () => {
-      const setEnv = jest.fn();
+      const setEnv = vi.fn();
       const initialEnv = { TEST_KEY: "test_value" };
       renderSidebar({ env: initialEnv, setEnv });
 
@@ -80,7 +80,7 @@ describe("Sidebar Environment Variables", () => {
     });
 
     it("should update environment variable value", () => {
-      const setEnv = jest.fn();
+      const setEnv = vi.fn();
       const initialEnv = { TEST_KEY: "test_value" };
       renderSidebar({ env: initialEnv, setEnv });
 
@@ -110,7 +110,7 @@ describe("Sidebar Environment Variables", () => {
 
   describe("Key Editing", () => {
     it("should maintain order when editing first key", () => {
-      const setEnv = jest.fn();
+      const setEnv = vi.fn();
       const initialEnv = {
         FIRST_KEY: "first_value",
         SECOND_KEY: "second_value",
@@ -131,7 +131,7 @@ describe("Sidebar Environment Variables", () => {
     });
 
     it("should maintain order when editing middle key", () => {
-      const setEnv = jest.fn();
+      const setEnv = vi.fn();
       const initialEnv = {
         FIRST_KEY: "first_value",
         SECOND_KEY: "second_value",
@@ -152,7 +152,7 @@ describe("Sidebar Environment Variables", () => {
     });
 
     it("should maintain order when editing last key", () => {
-      const setEnv = jest.fn();
+      const setEnv = vi.fn();
       const initialEnv = {
         FIRST_KEY: "first_value",
         SECOND_KEY: "second_value",
@@ -173,7 +173,7 @@ describe("Sidebar Environment Variables", () => {
     });
 
     it("should maintain order during key editing", () => {
-      const setEnv = jest.fn();
+      const setEnv = vi.fn();
       const initialEnv = {
         KEY1: "value1",
         KEY2: "value2",
@@ -204,7 +204,7 @@ describe("Sidebar Environment Variables", () => {
 
   describe("Multiple Operations", () => {
     it("should maintain state after multiple key edits", () => {
-      const setEnv = jest.fn();
+      const setEnv = vi.fn();
       const initialEnv = {
         FIRST_KEY: "first_value",
         SECOND_KEY: "second_value",
@@ -270,7 +270,7 @@ describe("Sidebar Environment Variables", () => {
 
   describe("Edge Cases", () => {
     it("should handle empty key", () => {
-      const setEnv = jest.fn();
+      const setEnv = vi.fn();
       const initialEnv = { TEST_KEY: "test_value" };
       renderSidebar({ env: initialEnv, setEnv });
 
@@ -283,7 +283,7 @@ describe("Sidebar Environment Variables", () => {
     });
 
     it("should handle special characters in key", () => {
-      const setEnv = jest.fn();
+      const setEnv = vi.fn();
       const initialEnv = { TEST_KEY: "test_value" };
       renderSidebar({ env: initialEnv, setEnv });
 
@@ -296,7 +296,7 @@ describe("Sidebar Environment Variables", () => {
     });
 
     it("should handle unicode characters", () => {
-      const setEnv = jest.fn();
+      const setEnv = vi.fn();
       const initialEnv = { TEST_KEY: "test_value" };
       renderSidebar({ env: initialEnv, setEnv });
 
@@ -309,7 +309,7 @@ describe("Sidebar Environment Variables", () => {
     });
 
     it("should handle very long key names", () => {
-      const setEnv = jest.fn();
+      const setEnv = vi.fn();
       const initialEnv = { TEST_KEY: "test_value" };
       renderSidebar({ env: initialEnv, setEnv });
 
@@ -330,7 +330,7 @@ describe("Sidebar Environment Variables", () => {
     };
 
     it("should update MCP server request timeout", () => {
-      const setConfig = jest.fn();
+      const setConfig = vi.fn();
       renderSidebar({ config: DEFAULT_INSPECTOR_CONFIG, setConfig });
 
       openConfigSection();
@@ -352,7 +352,7 @@ describe("Sidebar Environment Variables", () => {
     });
 
     it("should update MCP server proxy address", () => {
-      const setConfig = jest.fn();
+      const setConfig = vi.fn();
       renderSidebar({ config: DEFAULT_INSPECTOR_CONFIG, setConfig });
 
       openConfigSection();
@@ -377,7 +377,7 @@ describe("Sidebar Environment Variables", () => {
     });
 
     it("should update max total timeout", () => {
-      const setConfig = jest.fn();
+      const setConfig = vi.fn();
       renderSidebar({ config: DEFAULT_INSPECTOR_CONFIG, setConfig });
 
       openConfigSection();
@@ -402,7 +402,7 @@ describe("Sidebar Environment Variables", () => {
     });
 
     it("should handle invalid timeout values entered by user", () => {
-      const setConfig = jest.fn();
+      const setConfig = vi.fn();
       renderSidebar({ config: DEFAULT_INSPECTOR_CONFIG, setConfig });
 
       openConfigSection();
@@ -424,7 +424,7 @@ describe("Sidebar Environment Variables", () => {
     });
 
     it("should maintain configuration state after multiple updates", () => {
-      const setConfig = jest.fn();
+      const setConfig = vi.fn();
       const { rerender } = renderSidebar({
         config: DEFAULT_INSPECTOR_CONFIG,
         setConfig,

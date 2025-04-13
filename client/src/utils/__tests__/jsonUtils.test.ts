@@ -1,3 +1,4 @@
+import { describe, test, expect, vi } from "vitest";
 import {
   getDataType,
   tryParseJson,
@@ -222,7 +223,7 @@ describe("updateValueAtPath", () => {
 
   // Error handling tests
   test("returns original value when trying to update a primitive with a path", () => {
-    const spy = jest.spyOn(console, "error").mockImplementation();
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
     const result = updateValueAtPath("string", ["foo"], "bar");
     expect(result).toBe("string");
     expect(spy).toHaveBeenCalled();
@@ -230,7 +231,7 @@ describe("updateValueAtPath", () => {
   });
 
   test("returns original array when index is invalid", () => {
-    const spy = jest.spyOn(console, "error").mockImplementation();
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
     const arr = [1, 2, 3];
     expect(updateValueAtPath(arr, ["invalid"], 4)).toEqual(arr);
     expect(spy).toHaveBeenCalled();
@@ -238,7 +239,7 @@ describe("updateValueAtPath", () => {
   });
 
   test("returns original array when index is negative", () => {
-    const spy = jest.spyOn(console, "error").mockImplementation();
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
     const arr = [1, 2, 3];
     expect(updateValueAtPath(arr, ["-1"], 4)).toEqual(arr);
     expect(spy).toHaveBeenCalled();
