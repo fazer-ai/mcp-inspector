@@ -18,6 +18,8 @@ const mockClient = {
   connect: vi.fn().mockResolvedValue(undefined),
   close: vi.fn(),
   getServerCapabilities: vi.fn(),
+  getServerVersion: vi.fn(),
+  getInstructions: vi.fn(),
   setNotificationHandler: vi.fn(),
   setRequestHandler: vi.fn(),
 };
@@ -44,9 +46,9 @@ vi.mock("@/hooks/use-toast", () => ({
 
 // Mock the auth provider
 vi.mock("../../auth", () => ({
-  authProvider: {
+  InspectorOAuthClientProvider: vi.fn().mockImplementation(() => ({
     tokens: vi.fn().mockResolvedValue({ access_token: "mock-token" }),
-  },
+  })),
 }));
 
 describe("useConnection", () => {
