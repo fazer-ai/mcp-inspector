@@ -1,6 +1,6 @@
 {
   "name": "@fazer-ai/mcp-inspector",
-  "version": "0.10.2-fazer-ai.1",
+  "version": "0.10.2-fazer-ai.2",
   "description": "Model Context Protocol inspector",
   "license": "MIT",
   "author": "Anthropic, PBC (https://anthropic.com)",
@@ -38,9 +38,9 @@
     "publish-all": "npm publish --workspaces --access public && npm publish --access public"
   },
   "dependencies": {
-    "@fazer-ai/mcp-inspector-cli": "^0.10.2",
-    "@fazer-ai/mcp-inspector-client": "^0.10.2",
-    "@fazer-ai/mcp-inspector-server": "^0.10.2",
+    "@fazer-ai/mcp-inspector-cli": "^0.10.2-fazer-ai.2",
+    "@fazer-ai/mcp-inspector-client": "^0.10.2-fazer-ai.2",
+    "@fazer-ai/mcp-inspector-server": "^0.10.2-fazer-ai.2",
     "@modelcontextprotocol/sdk": "^1.10.0",
     "concurrently": "^9.0.1",
     "shell-quote": "^1.8.2",
