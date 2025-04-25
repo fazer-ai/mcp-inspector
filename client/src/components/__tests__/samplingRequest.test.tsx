@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import SamplingRequest from "../SamplingRequest";
 import { PendingRequest } from "../SamplingTab";
+import { describe, it, expect, afterEach, vi } from "vitest";
 
 const mockRequest: PendingRequest = {
   id: 1,
@@ -24,11 +25,11 @@ const mockRequest: PendingRequest = {
 };
 
 describe("Form to handle sampling response", () => {
-  const mockOnApprove = jest.fn();
-  const mockOnReject = jest.fn();
+  const mockOnApprove = vi.fn();
+  const mockOnReject = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("should call onApprove with correct text content when Approve button is clicked", () => {

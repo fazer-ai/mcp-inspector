@@ -1,10 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { Tabs } from "@/components/ui/tabs";
 import SamplingTab, { PendingRequest } from "../SamplingTab";
+import { describe, it, expect, vi } from "vitest";
 
 describe("Sampling tab", () => {
-  const mockOnApprove = jest.fn();
-  const mockOnReject = jest.fn();
+  const mockOnApprove = vi.fn();
+  const mockOnReject = vi.fn();
 
   const renderSamplingTab = (pendingRequests: PendingRequest[]) =>
     render(

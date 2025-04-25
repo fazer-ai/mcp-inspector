@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import { describe, it, beforeEach, vi } from "vitest";
+import "@testing-library/jest-dom/vitest";
+import { describe, it, beforeEach, expect, vi } from "vitest";
 import Sidebar from "../Sidebar";
 import { DEFAULT_INSPECTOR_CONFIG } from "@/lib/constants";
 import { InspectorConfig } from "@/lib/configurationTypes";
