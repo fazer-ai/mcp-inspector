@@ -85,7 +85,10 @@ const App = () => {
     "stdio" | "sse" | "streamable-http"
   >(() => {
     return (
-      (localStorage.getItem("lastTransportType") as "stdio" | "sse" | "streamable-http") ||
+      (localStorage.getItem("lastTransportType") as
+        | "stdio"
+        | "sse"
+        | "streamable-http") ||
       import.meta.env.VITE_MCP_DEFAULT_TRANSPORT_TYPE ||
       "stdio"
     );
