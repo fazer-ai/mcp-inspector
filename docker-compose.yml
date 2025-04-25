@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  inspector:
+    image: 'oven/bun:latest'
+    command:
+      - bunx
+      - '@fazer-ai/mcp-inspector@latest'
+    ports:
+      - '6274:6274'
+      - '6277:6277'
+    healthcheck:
+      test:
+        - CMD
+        - bun
+        - '-e'
+        - "fetch('http://localhost:6274').then(res => { process.exit(res.ok ? 0 : 1) }).catch(() => process.exit(1))"
+      interval: 5s
+      timeout: 20s
+      retries: 10
