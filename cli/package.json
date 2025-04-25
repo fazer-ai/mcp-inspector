@@ -1,6 +1,6 @@
 {
   "name": "@fazer-ai/mcp-inspector-cli",
-  "version": "0.10.2-fazer-ai",
+  "version": "0.10.2-fazer-ai.1",
   "description": "CLI for the Model Context Protocol inspector",
   "license": "MIT",
   "author": "Anthropic, PBC (https://anthropic.com)",
